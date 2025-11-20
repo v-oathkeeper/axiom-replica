@@ -9,10 +9,14 @@ import { Token } from "@/types";
 import { Activity } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
+import { useDispatch } from "react-redux"; 
+import { setSort } from "@/lib/features/filterSlice"; 
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [initialData, setInitialData] = useState<Token[]>([]);
+
+  const dispatch = useDispatch(); // Initialize dispatch
 
   // Redux State
   const { category, sortKey, sortDirection } = useSelector((state: RootState) => state.filter);
@@ -72,9 +76,14 @@ export default function Home() {
         {/* Table */}
         <div className="border border-border/40 rounded-xl overflow-hidden bg-card/50 backdrop-blur-sm">
           <TokenTable 
-            data={processedTokens} // Pass the processed data
+            data={processedTokens} 
             isLoading={isLoading} 
-            onTokenClick={(token) => console.log("Clicked:", token.name)} 
+            onTokenClick={(token) => console.log("Clicked:", token.name)}
+            
+            // Pass Sorting Props
+            sortKey={sortKey}
+            sortDirection={sortDirection}
+            onSort={(key) => dispatch(setSort(key))}
           />
         </div>
 
