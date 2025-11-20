@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { TokenRow } from "@/components/molecules/TokenRow";
 import { TableSkeletonRow } from "@/components/molecules/TableSkeletonRow";
+import { InfoTooltip } from "@/components/atoms/InfoTooltip";
 import { Token } from "@/types";
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -17,7 +18,7 @@ interface TokenTableProps {
   data: Token[];
   isLoading: boolean;
   onTokenClick?: (token: Token) => void;
-  // New Props for Sorting
+  // Props for Sorting
   sortKey?: keyof Token;
   sortDirection?: "asc" | "desc";
   onSort?: (key: keyof Token) => void;
@@ -32,8 +33,18 @@ export const TokenTable = ({
   onSort
 }: TokenTableProps) => {
 
-  // Helper to render a clickable header with icon
-  const SortableHeader = ({ label, resultKey, className }: { label: string, resultKey: keyof Token, className?: string }) => {
+  // Helper to render a clickable header with icon and optional tooltip
+  const SortableHeader = ({ 
+    label, 
+    resultKey, 
+    className,
+    tooltip 
+  }: { 
+    label: string, 
+    resultKey: keyof Token, 
+    className?: string,
+    tooltip?: string
+  }) => {
     const isActive = sortKey === resultKey;
     
     return (
@@ -43,6 +54,11 @@ export const TokenTable = ({
       >
         <div className={cn("flex items-center gap-1", className?.includes("text-right") && "justify-end")}>
           {label}
+          
+          {/* Render Tooltip if provided */}
+          {tooltip && <InfoTooltip content={tooltip} />}
+
+          {/* Render Sort Arrows */}
           {isActive ? (
             sortDirection === "asc" ? (
               <ArrowUp className="h-3 w-3 text-primary" />
@@ -62,22 +78,36 @@ export const TokenTable = ({
       <Table>
         <TableHeader>
           <TableRow className="hover:bg-transparent border-border/50">
-            {/* use helper component for each sortable column */}
             <TableHead className="w-[250px]">Token</TableHead> 
             
             <SortableHeader label="Price" resultKey="price" className="text-right" />
+            
             <SortableHeader label="1h %" resultKey="priceChange1h" className="text-right" />
+            
             <SortableHeader label="6h %" resultKey="priceChange6h" className="hidden md:table-cell text-right" />
-            <SortableHeader label="Volume" resultKey="volume24h" className="hidden md:table-cell text-right" />
-            <SortableHeader label="Liquidity" resultKey="liquidity" className="hidden lg:table-cell text-right" />
+            
+            <SortableHeader 
+              label="Volume" 
+              resultKey="volume24h" 
+              className="hidden md:table-cell text-right" 
+            />
+            
+            <SortableHeader 
+              label="Liquidity" 
+              resultKey="liquidity" 
+              className="hidden lg:table-cell text-right"
+              tooltip="Total value of assets locked in the pool."
+            />
           </TableRow>
         </TableHeader>
         <TableBody>
           {isLoading ? (
+            // Loading State
             Array.from({ length: 5 }).map((_, i) => (
               <TableSkeletonRow key={i} />
             ))
           ) : data.length > 0 ? (
+            // Data State
             data.map((token) => (
               <TokenRow 
                 key={token.id} 
@@ -86,6 +116,7 @@ export const TokenTable = ({
               />
             ))
           ) : (
+            // Empty State
             <TableRow>
               <TableCell colSpan={6} className="h-24 text-center text-muted-foreground">
                 No tokens found.
