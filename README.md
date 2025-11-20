@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Axiom Pulse Replica 
 
-## Getting Started
+A pixel-perfect, high-performance replica of the Axiom Trade token discovery table, built with **Next.js 14**, **TypeScript**, and **Redux Toolkit**.
 
-First, run the development server:
+![Lighthouse Score](https://img.shields.io/badge/Lighthouse_Score-91%2B-success?style=for-the-badge&logo=lighthouse)
+![Responsiveness](https://img.shields.io/badge/Responsiveness-Mobile_Compatible_(320px)-blue?style=for-the-badge)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ⚡ Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
+* **Framework:** Next.js 14 (App Router)
+* **Language:** TypeScript (Strict Mode)
+* **Styling:** Tailwind CSS + CSS Variables (Dark Mode)
+* **State Management:** Redux Toolkit (Filtering/Sorting) & React Query
+* **UI Library:** shadcn/ui (Radix Primitives)
+* **Testing:** Vitest + React Testing Library
 
-## Learn More
+## ✨ Key Features
 
-To learn more about Next.js, take a look at the following resources:
+### 1. Real-Time Market Simulation
+* Custom `useTokenSocket` hook simulates a WebSocket connection.
+* Sub-second price updates with **color-coded flash animations** (Green/Red).
+* Data persistence handling to prevent layout shifts.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Complex Interaction Patterns
+* **Modal:** Detailed token view with extended market metrics (Market Cap, Txns).
+* **Popover:** "System Status" indicator showing network health.
+* **Tooltip:** Contextual help on table headers (e.g., Liquidity explanation).
+* **Sorting & Filtering:** Interactive table headers and category tabs powered by Redux.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Performance & Optimization
+* **Lighthouse Score:** ≥ 91/100 (Mobile).
+* **Atomic Architecture:** Components organized into Atoms, Molecules, and Organisms for maximum reusability.
+* **Image Optimization:** Configured `next.config.ts` for remote patterns and strict caching headers.
+* **Zero Layout Shift:** Implemented Skeleton loading states for initial data fetch.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📱 Responsive Design (320px Support)
+The layout is fully responsive down to **320px (Mobile S)**. Complex columns (Liquidity, Volume) automatically hide on smaller screens to maintain readability.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![Mobile Layout Snapshot](./public/mobile-snapshot.png)
+
+
+---
+
+## 🚀 Getting Started
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/v-oathkeeper/axiom-replica.git
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Run Unit Tests**
+    ```bash
+    npm run test
+    ```
+
+---
+
