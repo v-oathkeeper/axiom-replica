@@ -11,10 +11,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { useDispatch } from "react-redux"; 
 import { setSort } from "@/lib/features/filterSlice"; 
+import { TokenDetailModal } from "@/components/organisms/TokenDetailModal";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [initialData, setInitialData] = useState<Token[]>([]);
+
+  const [selectedToken, setSelectedToken] = useState<Token | null>(null);
 
   const dispatch = useDispatch(); // Initialize dispatch
 
@@ -28,6 +31,8 @@ export default function Home() {
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  
 
   const liveTokens = useTokenSocket(initialData);
 
@@ -78,7 +83,7 @@ export default function Home() {
           <TokenTable 
             data={processedTokens} 
             isLoading={isLoading} 
-            onTokenClick={(token) => console.log("Clicked:", token.name)}
+            onTokenClick={(token) => setSelectedToken(token)}
             
             // Pass Sorting Props
             sortKey={sortKey}
@@ -88,6 +93,13 @@ export default function Home() {
         </div>
 
       </div>
+
+      <TokenDetailModal 
+  token={selectedToken} 
+  isOpen={!!selectedToken} 
+  onClose={() => setSelectedToken(null)} 
+      />
+      
     </main>
   );
 }
