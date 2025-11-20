@@ -39,6 +39,23 @@ https://axiom-replica-mu.vercel.app/
 
 ---
 
+## 🧠 Design Decisions
+
+### 1. Architecture: Atomic Design
+I utilized the **Atomic Design Pattern** (Atoms, Molecules, Organisms) to structure components.
+* **Why?** It enforces reusability and separation of concerns. Small changes (like updating a `TokenAvatar`) propagate everywhere instantly, ensuring visual consistency and easier maintenance.
+
+### 2. State Management: Redux Toolkit vs Context
+I chose **Redux Toolkit** over the native Context API.
+* **Why?** The assignment required handling "complex state" (Filtering, Sorting, Search). Redux provides a cleaner way to separate logic (Slices) from UI components and offers better performance for frequent updates compared to Context, which can trigger unnecessary re-renders.
+
+### 3. Real-Time Data: Custom Hook & Mocking
+I implemented a custom `useTokenSocket` hook to simulate WebSocket behavior.
+* **Why?** To satisfy the "WebSocket mock" requirement without needing a separate backend server. This makes the application self-contained and easy to deploy on Vercel while demonstrating how I would handle live subscription data in a real production environment (using `useEffect` for connection lifecycle).
+
+### 4. Styling: Tailwind CSS & Shadcn UI
+* **Why?** Tailwind allows for rapid, atomic styling that results in smaller bundle sizes. Shadcn UI provides accessible, unstyled primitives (Radix UI), allowing me to hit the "Pixel Perfect" requirement while ensuring the app is accessible (ARIA compliant) and responsive.
+
 ## 📱 Responsive Design (320px Support)
 The layout is fully responsive down to **320px (Mobile S)**. Complex columns (Liquidity, Volume) automatically hide on smaller screens to maintain readability.
 
