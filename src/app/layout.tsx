@@ -9,8 +9,14 @@ import { QueryProvider } from '@/providers/QueryProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Axiom Pulse Replica',
-  description: 'Token Trading Table assignment built with Next.js 14 and Atomic Design.',
+  title: 'Axiom Pulse Replica | Real-time Token Discovery',
+  description: 'Live analysis of new token pairs, final stretch assets, and liquidity pools.',
+  keywords: ['crypto', 'token', 'dashboard', 'axiom', 'nextjs'],
+  openGraph: {
+    title: 'Axiom Pulse Replica',
+    description: 'Real-time Token Discovery Dashboard',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

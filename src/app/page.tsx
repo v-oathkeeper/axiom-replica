@@ -28,7 +28,7 @@ export default function Home() {
     const timer = setTimeout(() => {
       setInitialData(generateMockTokens());
       setIsLoading(false);
-    }, 1500);
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
