@@ -86,7 +86,7 @@ export default function Home() {
         <FilterBar />
 
         {/* Main Data Table */}
-        <div className="border border-border/40 rounded-xl overflow-hidden bg-card/50 backdrop-blur-sm">
+        <div className="border border-border/40 rounded-xl overflow-x-auto bg-card/50 backdrop-blur-sm">
           <TokenTable 
             data={processedTokens} 
             isLoading={isLoading} 
