@@ -7,7 +7,7 @@ A pixel-perfect, high-performance replica of the Axiom Trade token discovery tab
 
 ## ⚡ Live Demo
 
-
+https://axiom-replica-mu.vercel.app/
 ---
 
 ## 🛠️ Tech Stack
